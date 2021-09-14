@@ -34,19 +34,15 @@ const UpdatePostModal = () => {
 
         resetPostData();
 
-        // setShowToast({
-        //     show: true,
-        //     message,
-        //     type: success ? 'success' : 'danger',
-        // });
+        setShowToast({
+            show: true,
+            message,
+            type: success ? 'success' : 'danger',
+        });
     };
 
     return (
-        <Modal
-            show={showUpdatePostModal}
-            animation={false}
-            onHide={resetPostData}
-        >
+        <Modal show={showUpdatePostModal} onHide={resetPostData}>
             <Modal.Header closeButton>
                 <Modal.Title>Making progress?</Modal.Title>
             </Modal.Header>

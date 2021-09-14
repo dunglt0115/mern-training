@@ -47,7 +47,6 @@ const AddPostModal = () => {
     return (
         <Modal
             show={showAddPostModal}
-            animation={false}
             onHide={resetAddPostData}
         >
             <Modal.Header closeButton>
