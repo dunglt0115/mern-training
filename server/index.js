@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 5000;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_CONNECTION_STRING);
+        await mongoose.connect(
+            `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@mern-training.bfm7z.mongodb.net/mern-training?retryWrites=true&w=majority`
+        );
         console.log('MongoDB connected');
     } catch (error) {
         console.log(error.message);
