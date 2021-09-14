@@ -80,7 +80,7 @@ router.put('/:id', verifyJwtToken, async (req, res) => {
     if (!title) {
         return res.status(400).json({
             success: false,
-            message: 'Invalid title'
+            message: 'Missing title'
         });
     }
 

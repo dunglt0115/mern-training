@@ -3,8 +3,34 @@ import express from 'express';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/User.js';
+import { verifyJwtToken } from '../middlewares/auth.js';
 
 const router = express.Router();
+
+/**
+ * @route GET api/auth
+ * @desc Check if user is logged in
+ * @access Public
+ */
+router.get('/', verifyJwtToken, async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.userId).select('-password');
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        return res.json({ success: true, user });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+            stack: error.stack
+        });
+    }
+});
 
 /**
  * @route POST api/auth/register
@@ -62,7 +88,7 @@ router.post('/login', async (req, res) => {
     if (!username || !password) {
         return res.status(400).json({
             success: false,
-            message: 'Invalid username or password'
+            message: 'Missing username or password'
         });
     }
 
